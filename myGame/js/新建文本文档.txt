@@ -1,0 +1,66 @@
+IE中使用的是obj.currentStyle方法，而FF是用的是getComputedStyle 方法。
+
+<script type=”text/javascript”>  
+function GetCurrentStyle (obj, prop) {     
+    if (obj.currentStyle) {        
+        return obj.currentStyle[prop];     
+    }      
+    else if (window.getComputedStyle) {        
+        propprop = prop.replace (/([A-Z])/g, “-$1″);           
+        propprop = prop.toLowerCase ();        
+        return document.defaultView.getComputedStyle (obj,null)[prop];     
+    }      
+    return null;   
+}   
+var dd=document.getElementById(“qq”);   
+alert(GetCurrentStyle(dd,”width”));   
+</script>
+
+
+function getDefaultStyle(obj,attribute){ // 返回最终样式函数，兼容IE和DOM，设置参数：元素对象、样式特性   
+ return obj.currentStyle?obj.currentStyle[attribute]:document.defaultView.getComputedStyle(obj,false)[attribute];   
+}
+
+
+
+
+
+
+////////
+function getDefaultStyle(obj,attribute){ // 返回最终样式函数，兼容IE和DOM，设置参数：元素对象、样式特性   
+ return obj.currentStyle?obj.currentStyle[attribute]:document.defaultView.getComputedStyle(obj,false)[attribute];   
+}
+
+function per(){
+	
+	this.act=move;                       //赋地址的，不用在move后加()
+	         this.moveUp=function(){
+        		
+				
+				var	  pos=document.getElementById('person');
+				      pos=getDefaultStyle(pos,"top");
+				 var  pos_val=pos.substring(0,pos.length-2);
+					  pos=parseInt(pos_val)-5+"px";
+			 }
+}
+
+var haha=new per();                 //创建新对象，可以加()，也可以不加
+
+
+function move(direct){
+		switch(direct){
+			case "up":
+			       haha.moveUp();   
+				   break;
+			case "down":
+			          
+				   break;
+			case "left":
+			       alert("向左移动");
+				   break;
+			case "right":
+			       alert("向右移动");
+				   break;
+		}
+		
+	}
